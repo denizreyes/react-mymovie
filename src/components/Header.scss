@@ -1,0 +1,46 @@
+header{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #373b69;
+  padding: 1rem 2rem;
+  .title{
+    font-size: 1.2rem;
+  }
+  .search{
+    input{
+      font-size: 1.2rem;
+      color: #FFF;
+      outline: none;
+      border: 2px solid #22254b;
+      background: transparent;
+      padding: 0.5rem 1.5rem;
+      border-radius: 4px;
+      width: 300px;
+      &::placeholder{
+        color: #232444;
+      }
+      &:hover, &:focus{
+        background: #22254b;
+        color: #FFF;
+        &::placeholder{
+          color: #FFF;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 600px){
+  header{
+    .title{
+      font-size: 1rem;
+    }
+    .search{
+      input{
+        width: 150px;
+      }
+    }
+  }
+}

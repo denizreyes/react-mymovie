@@ -1,54 +1,45 @@
 import React, {useEffect, useState} from 'react';
+import axios from 'axios';
+import "@fontsource/poppins";
 
-import Movie from './components/Movie'
 import Header from './components/Header'
+import Home from './pages/Home/Home';
+import api from './api/api';
 
-const FEATURED_API= 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=04c35731a5ee918f014970082a0088b1&page=1'
+import './assets/css/base.scss';
 
-const SEARCH_API= 'https://api.themoviedb.org/3/search/movie?api_key=04c35731a5ee918f014970082a0088b1&query='
+const App= () => {
+  const [movies, setMovies]= useState([]);
+  const [searchValue, setSearchValue]= useState('');
 
-function App() {
-  const [movies, setMovies]= useState([])
-  const [searchValue, setSearchValue]= useState('')
-
-  useEffect( () => {
-    getMovies(FEATURED_API)
-  }, [])
-
-  const getMovies= API => {
-    fetch(API)
-    .then(res => res.json())
-    .then(data => setMovies(data.results))
+  const getMovies= async url => {
+    const res= await axios.get(url);
+    setMovies(res.data.results);
+  }
+  const handleSubmit= event => {
+    event.preventDefault();
+    if(searchValue && searchValue.length > 2){
+      getMovies(api.SEARCH_API + searchValue);
+      setSearchValue('');
+    }
   }
 
-  const handleOnSubmit= (event) => {
-    event.preventDefault()
-
-    if(searchValue.length > 2){
-      getMovies(SEARCH_API + searchValue)
-      setSearchValue('')
-    }  
-  }
-
-  const handleOnChange= event => {
+  const handleChange= event => {
     setSearchValue(event.target.value);
   }
 
+  useEffect(() => {
+    getMovies(api.FEATURED_API);
+  }, [])
+
   return (    
-    <div>
+    <>
       <Header 
-        handleOnSubmit={handleOnSubmit} 
-        handleOnChange={handleOnChange}
+        handleSubmit={handleSubmit} 
+        handleChange={handleChange}
         searchValue={searchValue}/>
-      <div className="movie-container-center">
-        <div className="movie-container">
-          {
-            movies.length > 0 &&
-            movies.map(movie => (<Movie key={movie.id} {...movie}/>))
-          }
-        </div>
-    </div>
-    </div>
+      <Home movies={movies} />
+    </>
   );
 }
 

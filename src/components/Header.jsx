@@ -1,8 +1,10 @@
 import React from 'react'
 
+import './Header.scss';
+
 const Header = ({
-  handleOnSubmit, 
-  handleOnChange,
+  handleSubmit, 
+  handleChange,
   searchValue
 }) => {
   return (
@@ -11,13 +13,13 @@ const Header = ({
         <h1>MYmovie</h1>
       </div>
       <div className="search">
-        <form onSubmit={handleOnSubmit}>
+        <form onSubmit={handleSubmit}>
           <input 
-            className="search-input" 
+            className="search_input" 
             type="text" 
             name="search" 
             value={searchValue} 
-            onChange={handleOnChange}
+            onChange={handleChange}
             placeholder="Search..."/>
         </form>
       </div>

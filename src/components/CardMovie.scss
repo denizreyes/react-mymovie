@@ -1,0 +1,71 @@
+
+.cardmovie{
+  margin: 1rem;
+  width: 300px;
+  background: #373b69;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+
+  img{
+    height: 450px;
+    width: 100%;
+    object-fit: cover;
+    transition: all 0.4s ease-in-out;
+  }
+  .info{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    h3{
+      font-size: 1.1rem;
+    }
+    .tag{
+      padding: 0.5rem;
+      border-radius: 5px;
+      background: #22254b;
+      margin-left: 0.3rem;
+      &.green{
+        color: green;
+      }      
+      &.orange{
+        color: orange;
+      }      
+      &.red{
+        color: red;
+      }
+    }
+  }
+  .over{
+    position: relative;
+    color: #22254b;
+    background: #FFF;
+    padding: 1rem;
+    height: 65%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: auto;
+    transform: translateY(101%);
+    transition: all 0.4s ease-in-out;
+  }
+  &:hover > .over{
+    transform: translateY(0%);
+  }
+  &:hover > img{
+    transform: scale(1.1);
+  }
+}
+
+@media screen and (max-width: 600px){
+  .cardmovie{
+    width: 100%;
+    img{
+      height: 550px;
+    }
+  }
+}
